@@ -26,7 +26,7 @@ router.get('/google', (req, res, next) => {
     if (req.query.redirect) { req.session.returnTo = req.query.redirect;} next();}, passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // Rota de retorno após o cliente aprovar no Google (O parâmetro session: false impede conflitos com o nosso express-session)
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/auth/login', session: false }), authController.googleCallback);
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/barbearia-app/auth/login', session: false }), authController.googleCallback);
 
 
 router.get('/esqueceu-senha', authController.renderEsqueceuSenha);

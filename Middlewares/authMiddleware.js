@@ -17,7 +17,7 @@ module.exports = {
         res.status(403).send(`
             <h1>Acesso Negado 🚫</h1>
             <p>Você não tem permissão de CEO para acessar esta área.</p>
-            <a href="/barbearia-app/">Voltar ao início</a>
+            <a href="/barbearia-app">Voltar ao início</a>
         `);
     },
 
@@ -39,7 +39,7 @@ module.exports = {
         if (req.session && req.session.userId) {
             if (req.session.userRole === 'superadmin') return res.redirect('/barbearia-app/superadmin');
             if (req.session.userRole === 'dono') return res.redirect('/barbearia-app/admin/dashboard');
-            return res.redirect('/barbearia-app/');
+            return res.redirect('/barbearia-app');
         }
         // Se não estiver logado, deixa ele ver a tela de login/cadastro em paz
         next();

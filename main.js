@@ -4,6 +4,13 @@ require('dotenv').config();
 const app = express();
 const path = require('path');
 
+// --- Importação das Rotas ---
+const authRoutes = require('./routes/auth');
+const superAdminRoutes = require('./routes/superadmin');
+const adminRoutes = require('./routes/admin');
+const apiRoutes = require('./routes/api');
+const clienteRoutes = require('./routes/cliente');
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -41,12 +48,7 @@ app.use('/barbearia-app', express.static(path.join(__dirname, 'public')));
 app.get('/termos', (req, res) => res.render('institucional/termos'));
 app.get('/privacidade', (req, res) => res.render('institucional/privacidade'));
 
-// --- Importação das Rotas ---
-const authRoutes = require('./routes/auth');
-const superAdminRoutes = require('./routes/superadmin');
-const adminRoutes = require('./routes/admin');
-const apiRoutes = require('./routes/api');
-const clienteRoutes = require('./routes/cliente');
+
 
 // --- Definição das Rotas Principais ---
 // Tudo que for de login/cadastro passa por aqui
@@ -62,7 +64,7 @@ app.use('/barbearia-app/admin', adminRoutes);
 app.use('/barbearia-app/api', apiRoutes);
 
 // Rotas do Cliente final (Agendamento)
-app.use('/barbearia-app/', clienteRoutes); 
+app.use('/barbearia-app', clienteRoutes); 
 
 // Erros
 app.use((err, req, res, next) => {
@@ -73,5 +75,5 @@ app.use((err, req, res, next) => {
 // --- Iniciando o Servidor ---
 app.listen(PORT, () => {
     console.log(`🚀 Servidor rodando na porta ${PORT}`);
-    console.log(`Acesse: https://solucaosobmedida.com.br/barbearia/:${PORT}/`);
+    console.log(`Acesse: https://solucaosobmedida.com.br/barbearia-app/:${PORT}`);
 });
