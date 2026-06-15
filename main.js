@@ -39,10 +39,10 @@ app.use((req, res, next) => {
 // --- Configurações de View Engine (EJS) ---
 app.set('view engine', 'ejs');
 // Alinhado com o padrão de pastas da KingHost
-app.set('views', path.join(__dirname, 'views')); 
+app.set('views', path.join(__dirname, '../../www/barbearia-app/views')); 
 
 // CORREÇÃO: Prefixar o static path
-app.use('/barbearia-app', express.static(path.join(__dirname, 'public')));
+app.use('/barbearia-app', express.static(path.join(__dirname, '../../www/barbearia-app/public')));
 
 
 app.get('/termos', (req, res) => res.render('institucional/termos'));
