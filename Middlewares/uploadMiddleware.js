@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Garante que a pasta public/uploads existe antes de tentar salvar
-const uploadDir = path.join(__dirname, '../public/uploads');
+const uploadDir = path.join(__dirname, '../../www/barbearia-app/public/uploads');
 if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }

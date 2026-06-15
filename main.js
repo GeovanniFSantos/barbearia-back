@@ -1,23 +1,16 @@
-require('dotenv').config();
-const express = require('express');
-const path = require('path');
 const session = require('express-session');
-
+const express = require('express');
+require('dotenv').config();
 const app = express();
-const PORT = process.env.PORT || 3000;
+const path = require('path');
 
-// --- Configurações de View Engine (EJS) ---
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+
+const PORT = process.env.PORT || 3000;
 
 // --- Middlewares ---
 // Para ler dados de formulários (POST)
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// Pasta pública para o TailwindCSS, imagens e JS do front-end
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
 
 // Configuração de Sessão para manter o usuário logado
 app.use(session({
@@ -26,6 +19,23 @@ app.use(session({
     saveUninitialized: false,
     cookie: { secure: false }
 }));
+
+// Middleware para evitar cache e garantir que as páginas sejam sempre atualizadas
+app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+    next();
+});
+
+// --- Configurações de View Engine (EJS) ---
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../../www/barbearia-app/views'));
+
+// Pasta pública para o TailwindCSS, imagens e JS do front-end
+app.use(express.static(path.join(__dirname, '../../www/barbearia-app/public')));
+app.use(express.static('public'));
+
 
 app.get('/termos', (req, res) => res.render('institucional/termos'));
 app.get('/privacidade', (req, res) => res.render('institucional/privacidade'));
@@ -39,19 +49,25 @@ const clienteRoutes = require('./routes/cliente');
 
 // --- Definição das Rotas Principais ---
 // Tudo que for de login/cadastro passa por aqui
-app.use('/auth', authRoutes);
+app.use('/barbearia-app/auth', authRoutes);
 
 // Rotas do SuperAdmin
-app.use('/superadmin', superAdminRoutes);
+app.use('/barbearia-app/superadmin', superAdminRoutes);
 
 // Rotas do Dono da Barbearia
-app.use('/admin', adminRoutes);
+app.use('/barbearia-app/admin', adminRoutes);
 
 // Rotas da API para o cliente final (Busca de horários disponíveis)
-app.use('/api', apiRoutes);
+app.use('/barbearia-app/api', apiRoutes);
 
 // Rotas do Cliente final (Agendamento)
-app.use('/', clienteRoutes); 
+app.use('/barbearia-app/', clienteRoutes); 
+
+// Erros
+app.use((err, req, res, next) => {
+    console.error("❌ ERRO NO SERVIDOR:", err.stack);
+    res.status(500).send("Algo deu errado no servidor da Barbearia!");
+});
 
 // --- Iniciando o Servidor ---
 app.listen(PORT, () => {

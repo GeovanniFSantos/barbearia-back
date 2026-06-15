@@ -5,7 +5,7 @@ module.exports = {
             return next(); // Está logado, pode passar!
         }
         // Se não estiver logado, manda de volta pro login
-        res.redirect('/auth/login');
+        res.redirect('/barbearia-app/auth/login');
     },
 
     // 2. Trava do SuperAdmin (Só você entra)
