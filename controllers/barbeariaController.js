@@ -1,5 +1,5 @@
 const db = require('../db/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // Renderiza a página de configurações da barbearia e Perfil
 exports.renderConfigBarbearia = async (req, res) => {

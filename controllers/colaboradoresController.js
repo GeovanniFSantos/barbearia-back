@@ -1,5 +1,5 @@
 const db = require('../db/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 // Renderiza a lista de colaboradores
 // Renderiza a lista de colaboradores com Faturamento

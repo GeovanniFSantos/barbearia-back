@@ -1,4 +1,4 @@
-const db = require('../db/db'); // Ou '../db/db'
+const db = require('../db/db');
 
 exports.renderDashboard = async (req, res) => {
     try {

@@ -1,5 +1,5 @@
 const db = require('../db/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer'); 
 
@@ -196,7 +196,7 @@ exports.enviarEmailRecuperacao = async (req, res) => {
 
 exports.renderRedefinirSenha = async (req, res) => {
     const { token } = req.query;
-    if (!token) return res.redirect('/auth/login');
+    if (!token) return res.redirect('/barbearia-app/auth/login');
     const barbearia = await buscarBarbeariaFixa();
 
     try {
