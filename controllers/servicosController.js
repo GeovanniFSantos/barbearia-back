@@ -30,7 +30,7 @@ exports.cadastrarServico = async (req, res) => {
             'INSERT INTO servicos (barbearia_id, nome, descricao, preco, duracao_minutos) VALUES (?, ?, ?, ?, ?)',
             [barbeariaId, nome, descricao, preco, duracao_minutos]
         );
-        res.redirect('/admin/servicos');
+        res.redirect('/barbearia-app/admin/servicos');
     } catch (error) {
         console.error("Erro ao cadastrar serviço:", error.message);
         res.status(500).send("Erro ao salvar serviço no banco.");
@@ -42,7 +42,7 @@ exports.excluirServico = async (req, res) => {
     const { id } = req.params;
     try {
         await db.query('DELETE FROM servicos WHERE id = ? AND barbearia_id = ?', [id, req.session.barbeariaId]);
-        res.redirect('/admin/servicos');
+        res.redirect('/barbearia-app/admin/servicos');
     } catch (error) {
         console.error("Erro ao excluir serviço:", error.message);
         res.status(500).send("Erro ao excluir.");
@@ -58,7 +58,7 @@ exports.editarServico = async (req, res) => {
             'UPDATE servicos SET nome = ?, descricao = ?, preco = ?, duracao_minutos = ? WHERE id = ? AND barbearia_id = ?',
             [nome, descricao, preco, duracao_minutos, id, req.session.barbeariaId]
         );
-        res.redirect('/admin/servicos');
+        res.redirect('/barbearia-app/admin/servicos');
     } catch (error) {
         console.error("Erro ao editar serviço:", error.message);
         res.status(500).send("Erro ao editar.");

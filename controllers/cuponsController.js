@@ -32,7 +32,7 @@ exports.criarCupom = async (req, res) => {
             'INSERT INTO cupons (barbearia_id, codigo, tipo, valor, data_validade, ativo) VALUES (?, ?, ?, ?, ?, ?)',
             [barbeariaId, codigoFormatado, tipo, valor, data_validade || null, true]
         );
-        res.redirect('/admin/cupons?sucesso=true');
+        res.redirect('/barbearia-app/admin/cupons?sucesso=true');
     } catch (error) {
         console.error("Erro ao criar cupom:", error);
         res.status(500).send("Erro ao salvar cupom.");
@@ -45,7 +45,7 @@ exports.excluirCupom = async (req, res) => {
 
     try {
         await db.query('DELETE FROM cupons WHERE id = ? AND barbearia_id = ?', [id, barbeariaId]);
-        res.redirect('/admin/cupons');
+        res.redirect('/barbearia-app/admin/cupons');
     } catch (error) {
         console.error("Erro ao excluir cupom:", error);
         res.status(500).send("Erro ao excluir cupom.");
@@ -63,7 +63,7 @@ exports.alternarStatus = async (req, res) => {
             const novoStatus = cupom[0].ativo ? 0 : 1;
             await db.query('UPDATE cupons SET ativo = ? WHERE id = ? AND barbearia_id = ?', [novoStatus, id, barbeariaId]);
         }
-        res.redirect('/admin/cupons');
+        res.redirect('/barbearia-app/admin/cupons');
     } catch (error) {
         console.error("Erro ao alterar status:", error);
         res.status(500).send("Erro ao alterar status do cupom.");

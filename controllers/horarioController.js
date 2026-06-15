@@ -67,7 +67,7 @@ exports.salvarHorarios = async (req, res) => {
         
         // Confirma as alterações no banco
         await db.query('COMMIT');
-        res.redirect('/admin/horario_funcionamento');
+        res.redirect('/barbearia-app/admin/horario_funcionamento');
 
     } catch (error) {
         // Se deu erro, desfaz tudo

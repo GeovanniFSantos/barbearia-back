@@ -70,7 +70,7 @@ exports.cadastrarColaborador = async (req, res) => {
             [barbeariaId, nome, email, senhaHash, telefone]
         );
 
-        res.redirect('/admin/colaboradores');
+        res.redirect('/barbearia-app/admin/colaboradores');
     } catch (error) {
         console.error("Erro ao cadastrar colaborador:", error.message);
         res.status(500).send("Erro ao salvar no banco.");
@@ -85,7 +85,7 @@ exports.excluirColaborador = async (req, res) => {
     try {
         // A trava "AND barbearia_id = ?" garante que um dono não apague o barbeiro de outra barbearia
         await db.query('DELETE FROM usuarios WHERE id = ? AND barbearia_id = ? AND tipo = "colaborador"', [id, barbeariaId]);
-        res.redirect('/admin/colaboradores');
+        res.redirect('/barbearia-app/admin/colaboradores');
     } catch (error) {
         console.error("Erro ao excluir colaborador:", error.message);
         res.status(500).send("Erro ao excluir.");
@@ -103,7 +103,7 @@ exports.editarColaborador = async (req, res) => {
             'UPDATE usuarios SET nome = ?, telefone = ? WHERE id = ? AND barbearia_id = ? AND tipo = "colaborador"',
             [nome, telefone, id, barbeariaId]
         );
-        res.redirect('/admin/colaboradores');
+        res.redirect('/barbearia-app/admin/colaboradores');
     } catch (error) {
         console.error("Erro ao editar colaborador:", error.message);
         res.status(500).send("Erro ao editar.");

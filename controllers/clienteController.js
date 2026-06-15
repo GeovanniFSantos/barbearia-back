@@ -78,7 +78,7 @@ exports.realizarAgendamento = async (req, res) => {
             [barbeariaId, cliente_id, colaborador_id, servico_id, produtoIdInsert, data_hora, forma_pagamento || 'pendente', valorTotal, cupomAplicadoId]
         );
 
-        res.redirect(`/?sucesso=true`); // Retorna para a raiz
+        res.redirect(`/barbearia-app/?sucesso=true`); // Retorna para a raiz
     } catch (error) {
         console.error("Erro ao agendar:", error);
         res.status(500).send("Erro interno ao processar agendamento.");
@@ -154,7 +154,7 @@ exports.atualizarPerfil = async (req, res) => {
             [nome, telefone, clienteId]
         );
         req.session.userNome = nome;
-        res.redirect('/meu-perfil?sucesso=true');
+        res.redirect('/barbearia-app/meu-perfil?sucesso=true');
     } catch (error) {
         console.error("Erro ao atualizar perfil:", error);
         res.status(500).send("Erro ao atualizar dados.");

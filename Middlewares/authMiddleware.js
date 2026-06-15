@@ -17,7 +17,7 @@ module.exports = {
         res.status(403).send(`
             <h1>Acesso Negado 🚫</h1>
             <p>Você não tem permissão de CEO para acessar esta área.</p>
-            <a href="/">Voltar ao início</a>
+            <a href="/barbearia-app/">Voltar ao início</a>
         `);
     },
 
@@ -29,7 +29,7 @@ module.exports = {
         res.status(403).send(`
             <h1>Acesso Negado ✂️</h1>
             <p>Área restrita à gestão da barbearia.</p>
-            <a href="/auth/login">Voltar ao início</a>
+            <a href="/barbearia-app/auth/login">Voltar ao início</a>
         `);
     },
 

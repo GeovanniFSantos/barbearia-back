@@ -47,7 +47,7 @@ exports.salvarPagamentos = async (req, res) => {
             );
         }
         
-        res.redirect('/admin/pagamentos?sucesso=true');
+        res.redirect('/barbearia-app/admin/pagamentos?sucesso=true');
     } catch (error) {
         console.error("Erro ao salvar pagamentos:", error);
         res.status(500).send("Erro ao salvar formas de pagamento.");

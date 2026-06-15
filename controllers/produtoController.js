@@ -32,7 +32,7 @@ exports.cadastrarProduto = async (req, res) => {
     // Captura o link da imagem se o usuário fez upload
     let imagem_url = null;
     if (req.file) {
-        imagem_url = '/uploads/' + req.file.filename; 
+        imagem_url = '/barbearia-app/uploads/' + req.file.filename; 
     }
 
     try {
@@ -40,7 +40,7 @@ exports.cadastrarProduto = async (req, res) => {
             'INSERT INTO produtos (barbearia_id, nome, descricao, preco, quantidade_estoque, imagem_url) VALUES (?, ?, ?, ?, ?, ?)',
             [barbeariaId, nome, descricao, preco, quantidade_estoque, imagem_url]
         );
-        res.redirect('/admin/produtos');
+        res.redirect('/barbearia-app/admin/produtos');
     } catch (error) {
         console.error("Erro ao cadastrar produto:", error.message);
         res.status(500).send("Erro ao salvar produto no banco.");
@@ -55,7 +55,7 @@ exports.editarProduto = async (req, res) => {
 
     try {
         if (req.file) {
-            const imagem_url = '/uploads/' + req.file.filename;
+            const imagem_url = '/barbearia-app/uploads/' + req.file.filename;
             await db.query(
                 'UPDATE produtos SET nome = ?, descricao = ?, preco = ?, quantidade_estoque = ?, imagem_url = ? WHERE id = ? AND barbearia_id = ?',
                 [nome, descricao, preco, quantidade_estoque, imagem_url, produtoId, barbeariaId]
@@ -66,7 +66,7 @@ exports.editarProduto = async (req, res) => {
                 [nome, descricao, preco, quantidade_estoque, produtoId, barbeariaId]
             );
         }
-        res.redirect('/admin/produtos');
+        res.redirect('/barbearia-app/admin/produtos');
     } catch (error) {
         console.error("Erro ao editar produto:", error.message);
         res.status(500).send("Erro ao editar o produto.");
@@ -80,7 +80,7 @@ exports.excluirProduto = async (req, res) => {
 
     try {
         await db.query('DELETE FROM produtos WHERE id = ? AND barbearia_id = ?', [produtoId, barbeariaId]);
-        res.redirect('/admin/produtos');
+        res.redirect('/barbearia-app/admin/produtos');
     } catch (error) {
         console.error("Erro ao excluir produto:", error.message);
         res.status(500).send("Erro ao excluir o produto.");

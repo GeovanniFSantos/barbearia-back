@@ -92,7 +92,7 @@ exports.atualizarBarbearia = async (req, res) => {
         req.session.userNome = dono_nome;
 
         await db.query('COMMIT');
-        res.redirect('/admin/barbearia?sucesso=true');
+        res.redirect('/barbearia-app/admin/barbearia?sucesso=true');
 
     } catch (error) {
         await db.query('ROLLBACK');

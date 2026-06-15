@@ -14,7 +14,7 @@ const db = mysql.createPool({
 // Testa a conexão ao iniciar
 db.getConnection()
     .then(conn => {
-        console.log('✅ Conectado ao banco de dados: barbearia_dev');
+        console.log('✅ Conectado ao banco de dados: Solucão Sob Medida');
         conn.release();
     })
     .catch(err => {

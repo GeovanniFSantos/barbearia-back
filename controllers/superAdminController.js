@@ -30,7 +30,7 @@ exports.cadastrarBarbearia = async (req, res) => {
             'INSERT INTO barbearias (nome, slug, telefone, status) VALUES (?, ?, ?, ?)',
             [nome, slug, telefone, status]
         );
-        res.redirect('/superadmin');
+        res.redirect('/barbearia-app/superadmin');
     } catch (error) {
         console.error("Erro ao inserir barbearia:", error.message);
         if(error.code === 'ER_DUP_ENTRY') {
@@ -47,7 +47,7 @@ exports.alternarStatus = async (req, res) => {
 
     try {
         await db.query('UPDATE barbearias SET status = ? WHERE id = ?', [novoStatus, id]);
-        res.redirect('/superadmin');
+        res.redirect('/barbearia-app/superadmin');
     } catch (error) {
         console.error("Erro ao alterar status:", error.message);
         res.status(500).send("Erro ao alterar status.");

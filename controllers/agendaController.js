@@ -88,7 +88,7 @@ exports.criarAgendamento = async (req, res) => {
             [barbeariaId, cliente_id, colaborador_id, servico_id, produtoIdInsert, data_hora, valorTotal]
         );
 
-        res.redirect('/admin/agenda');
+        res.redirect('/barbearia-app/admin/agenda');
     } catch (error) {
         console.error("Erro ao criar agendamento manual:", error.message);
         res.status(500).send("Erro ao salvar agendamento no sistema.");
@@ -106,7 +106,7 @@ exports.atualizarStatus = async (req, res) => {
             'UPDATE agendamentos SET status = ? WHERE id = ? AND barbearia_id = ?',
             [status, id, barbeariaId]
         );
-        res.redirect('/admin/agenda');
+        res.redirect('/barbearia-app/admin/agenda');
     } catch (error) {
         console.error("🔥 Erro ao atualizar status no Banco de Dados:", error);
         res.status(500).send(`Erro interno: ${error.message}`);

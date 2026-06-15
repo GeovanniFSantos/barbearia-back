@@ -40,11 +40,11 @@ exports.realizarLogin = async (req, res) => {
         // Se for admin, garante que o ID na sessão é sempre 1
         if (usuario.tipo === 'dono' || usuario.tipo === 'colaborador') {
             req.session.barbeariaId = 1;
-            return res.redirect('/admin/dashboard');
+            return res.redirect('/barbearia-app/admin/dashboard');
         }
         
         // Se for cliente
-        return res.redirect('/'); 
+        return res.redirect('/barbearia-app/'); 
 
     } catch (error) {
         console.error(error);
@@ -74,7 +74,7 @@ exports.realizarCadastro = async (req, res) => {
             [nome, email, senhaHash, telefone]
         );
 
-        res.redirect('/auth/login?sucesso=true');
+        res.redirect('/barbearia-app/auth/login?sucesso=true');
     } catch (error) {
         console.error(error);
         res.status(500).send("Erro no cadastro");
@@ -83,7 +83,7 @@ exports.realizarCadastro = async (req, res) => {
 
 exports.logout = (req, res) => {
     req.session.destroy();
-    res.redirect('/auth/login');
+    res.redirect('/barbearia-app/auth/login');
 };
 
 // Google Callback
@@ -117,14 +117,14 @@ exports.googleCallback = async (req, res) => {
         
         if (usuarioTipo === 'dono' || usuarioTipo === 'colaborador') {
             req.session.barbeariaId = 1;
-            res.redirect('/admin/dashboard');
+            res.redirect('/barbearia-app/admin/dashboard');
         } else {
-            res.redirect('/');
+            res.redirect('/barbearia-app/');
         }
 
     } catch (error) {
         console.error("Erro no login com Google:", error);
-        res.redirect('/auth/login?erro=google');
+        res.redirect('/barbearia-app/auth/login?erro=google');
     }
 };
 
@@ -157,7 +157,7 @@ exports.enviarEmailRecuperacao = async (req, res) => {
         );
 
         const baseUrl = req.protocol + '://' + req.get('host');
-        const linkRecuperacao = `${baseUrl}/auth/redefinir-senha?token=${token}`;
+        const linkRecuperacao = `${baseUrl}/barbearia-app/auth/redefinir-senha?token=${token}`;
         
         const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -207,7 +207,7 @@ exports.renderRedefinirSenha = async (req, res) => {
         res.render('auth/redefinir-senha', { token, erro: null, redirect: '/', barbearia });
     } catch (error) {
         console.error(error);
-        res.redirect('/auth/login');
+        res.redirect('/barbearia-app/auth/login');
     }
 };
 
@@ -224,7 +224,7 @@ exports.salvarNovaSenha = async (req, res) => {
         const senhaHash = await bcrypt.hash(password, 10);
         await db.query('UPDATE usuarios SET senha = ?, reset_token = NULL, reset_token_expires = NULL WHERE id = ?', [senhaHash, usuario[0].id]);
         
-        res.redirect('/auth/login?sucesso=true');
+        res.redirect('/barbearia-app/auth/login?sucesso=true');
     } catch (error) {
         console.error(error);
         res.render('auth/redefinir-senha', { token, erro: 'Erro ao atualizar a senha.', redirect: '/', barbearia });
