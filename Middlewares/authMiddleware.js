@@ -37,9 +37,9 @@ module.exports = {
     verificarDeslogado: (req, res, next) => {
         // Se o usuário JÁ ESTIVER logado, manda ele de volta pro painel dele
         if (req.session && req.session.userId) {
-            if (req.session.userRole === 'superadmin') return res.redirect('/superadmin');
-            if (req.session.userRole === 'dono') return res.redirect('/admin/dashboard');
-            return res.redirect('/');
+            if (req.session.userRole === 'superadmin') return res.redirect('/barbearia-app/superadmin');
+            if (req.session.userRole === 'dono') return res.redirect('/barbearia-app/admin/dashboard');
+            return res.redirect('/barbearia-app/');
         }
         // Se não estiver logado, deixa ele ver a tela de login/cadastro em paz
         next();

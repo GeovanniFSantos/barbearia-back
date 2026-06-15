@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 const passport = require('../config/passport');
-const authMiddleware = require('../Middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 
 // Rota GET para mostrar o formulário de login (Ex: site.com/auth/login)

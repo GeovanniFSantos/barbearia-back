@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const clienteController = require('../controllers/clienteController');
-const authMiddleware = require('../middlewares/authMiddleware');
+const authMiddleware = require('../Middlewares/authMiddleware');
 
 // 1. Rota de Meus Agendamentos (VEM ANTES DO SLUG!)
 router.get('/meus-agendamentos', authMiddleware.verificarLogin, clienteController.listarMeusAgendamentos);

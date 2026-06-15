@@ -3,7 +3,7 @@ const router = express.Router();
 const superAdminController = require('../controllers/superAdminController');
 
 // Importando os middlewares
-const authMiddleware = require('../Middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 // Rota GET para ver o painel
 router.get('/', authMiddleware.verificarLogin, authMiddleware.verificarSuperAdmin, superAdminController.renderDashboard);
