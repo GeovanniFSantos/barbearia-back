@@ -28,13 +28,14 @@ app.use((req, res, next) => {
     next();
 });
 
+
 // --- Configurações de View Engine (EJS) ---
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '../../www/barbearia-app/views'));
+// Alinhado com o padrão de pastas da KingHost
+app.set('views', path.join(__dirname, 'views')); 
 
-// Pasta pública para o TailwindCSS, imagens e JS do front-end
-app.use(express.static(path.join(__dirname, '../../www/barbearia-app/public')));
-app.use(express.static('public'));
+// CORREÇÃO: Prefixar o static path
+app.use('/barbearia-app', express.static(path.join(__dirname, 'public')));
 
 
 app.get('/termos', (req, res) => res.render('institucional/termos'));
