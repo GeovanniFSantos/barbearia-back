@@ -37,6 +37,7 @@ exports.realizarLogin = async (req, res) => {
         req.session.userNome = usuario.nome;
         req.session.userRole = usuario.tipo;
         
+        if (usuario.tipo === 'superadmin') return res.redirect('/barbearia-app/superadmin');
         // Se for admin, garante que o ID na sessão é sempre 1
         if (usuario.tipo === 'dono' || usuario.tipo === 'colaborador') {
             req.session.barbeariaId = 1;
@@ -55,7 +56,7 @@ exports.realizarLogin = async (req, res) => {
 // Renderiza Cadastro
 exports.renderCadastro = async (req, res) => {
     const barbearia = await buscarBarbeariaFixa();
-    res.render('auth/cadastro', { erro: null, redirect: '/', barbearia });
+    res.render('auth/cadastro', { erro: null, redirect: '/barbearia-app/', barbearia });
 };
 
 // Realiza Cadastro
