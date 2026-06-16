@@ -41,7 +41,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../../www/barbearia-app/views')); 
 
 // -- Prefixar o static path
-app.use('/barbearia-app/public', express.static(
+app.use('/barbearia-app', express.static(
     path.join(__dirname, '../../www/barbearia-app/public')));
 
 
