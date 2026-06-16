@@ -37,7 +37,9 @@ exports.realizarLogin = async (req, res) => {
         req.session.userNome = usuario.nome;
         req.session.userRole = usuario.tipo;
         
-        if (usuario.tipo === 'superadmin') return res.redirect('/barbearia-app/superadmin');
+        if (usuario.tipo === 'superadmin') {
+            return res.redirect('/barbearia-app/superadmin');
+        }
         // Se for admin, garante que o ID na sessão é sempre 1
         if (usuario.tipo === 'dono' || usuario.tipo === 'colaborador') {
             req.session.barbeariaId = 1;
