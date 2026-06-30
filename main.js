@@ -63,8 +63,11 @@ app.use('/barbearia-app/admin', adminRoutes);
 // Rotas da API para o cliente final (Busca de horários disponíveis)
 app.use('/barbearia-app/api', apiRoutes);
 
+// Rota pra inicializar a tela de landing-Page
+app.get('/barbearia-app', (req, res) => res.render('institucional/landing'));
+
 // Rotas do Cliente final (Agendamento)
-app.use('/barbearia-app', clienteRoutes); 
+app.use('/barbearia', clienteRoutes); 
 
 // Erros
 app.use((err, req, res, next) => {

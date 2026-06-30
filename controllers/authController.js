@@ -47,7 +47,7 @@ exports.realizarLogin = async (req, res) => {
         }
         
         // Se for cliente
-        return res.redirect('/barbearia-app/'); 
+        return res.redirect('/barbearia'); 
 
     } catch (error) {
         console.error(error);
@@ -58,7 +58,7 @@ exports.realizarLogin = async (req, res) => {
 // Renderiza Cadastro
 exports.renderCadastro = async (req, res) => {
     const barbearia = await buscarBarbeariaFixa();
-    res.render('auth/cadastro', { erro: null, redirect: '/barbearia-app/', barbearia });
+    res.render('auth/cadastro', { erro: null, redirect: '/barbearia', barbearia });
 };
 
 // Realiza Cadastro
@@ -122,7 +122,7 @@ exports.googleCallback = async (req, res) => {
             req.session.barbeariaId = 1;
             res.redirect('/barbearia-app/admin/dashboard');
         } else {
-            res.redirect('/barbearia-app/');
+            res.redirect('/barbearia');
         }
 
     } catch (error) {
