@@ -64,7 +64,7 @@ app.use('/barbearia-app/admin', adminRoutes);
 app.use('/barbearia-app/api', apiRoutes);
 
 // Rota pra inicializar a tela de landing-Page
-app.get('/barbearia-app', (req, res) => res.render('institucional/landing'));
+app.get('/barbearia-app/', (req, res) => res.render('institucional/landing'));
 
 // Rotas do Cliente final (Agendamento)
 app.use('/barbearia', clienteRoutes); 
