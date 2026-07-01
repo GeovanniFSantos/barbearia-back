@@ -47,8 +47,8 @@ exports.atualizarBarbearia = async (req, res) => {
         await db.query('START TRANSACTION');
 
         // 1. Atualiza a Barbearia (Fotos e Textos)
-        let foto_perfil = req.files && req.files['foto_perfil'] ? `/uploads/${req.files['foto_perfil'][0].filename}` : null;
-        let banner = req.files && req.files['banner'] ? `/uploads/${req.files['banner'][0].filename}` : null;
+        let foto_perfil = req.files && req.files['foto_perfil'] ? `/barbearia-app/public/uploads/${req.files['foto_perfil'][0].filename}` : null;
+        let banner = req.files && req.files['banner'] ? `/barbearia-app/public/uploads/${req.files['banner'][0].filename}` : null;
 
         let queryBarbearia = "UPDATE barbearias SET nome = ?, descricao = ?";
         let paramsBarbearia = [nome, descricao];
