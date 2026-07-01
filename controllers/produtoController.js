@@ -32,7 +32,7 @@ exports.cadastrarProduto = async (req, res) => {
     // Captura o link da imagem se o usuário fez upload
     let imagem_url = null;
     if (req.file) {
-        imagem_url = '/barbearia-app/uploads/' + req.file.filename; 
+        imagem_url = '/barbearia-app/public/uploads/' + req.file.filename; 
     }
 
     try {
@@ -55,7 +55,7 @@ exports.editarProduto = async (req, res) => {
 
     try {
         if (req.file) {
-            const imagem_url = '/barbearia-app/uploads/' + req.file.filename;
+            const imagem_url = '/barbearia-app/public/uploads/' + req.file.filename;
             await db.query(
                 'UPDATE produtos SET nome = ?, descricao = ?, preco = ?, quantidade_estoque = ?, imagem_url = ? WHERE id = ? AND barbearia_id = ?',
                 [nome, descricao, preco, quantidade_estoque, imagem_url, produtoId, barbeariaId]
